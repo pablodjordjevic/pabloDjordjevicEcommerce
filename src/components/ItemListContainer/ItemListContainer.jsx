@@ -7,18 +7,20 @@ const ItemListContainer = () => {
 const [products, setProducts] = useState ([]);
 
 
-useEffect(() =>{
-  getProducts.then((dataList) =>{
-    setProducts(dataList)
-  })
-  .catch(error => console.log(error))
-},)
+  useEffect(() =>{
+    getProducts.then((dataList) =>{
+      setProducts(dataList)
+    })
+    .catch(error => console.log(error))
+  },)
 
-const getProducts = new Promise((resolve, reject) =>{
-    setTimeout(() =>{
-      resolve(data)
-    },2000)
+  const getProducts = new Promise((resolve, reject) =>{
+      setTimeout(() =>{
+        resolve(data)
+      },2000)
   })
+
+
 
   return (
     <div>
