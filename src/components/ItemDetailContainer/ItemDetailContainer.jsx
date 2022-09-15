@@ -1,29 +1,24 @@
 import { useEffect, useState } from "react"
 import data from "../data"
 import ItemDetail from "../ItemDetail/ItemDetail";
+import { useParams } from "react-router-dom";
 
 const ItemDetailContainer = () => {
     const [products, setProducts] = useState ([]);
+    const {detalleId} = useParams();
 
     useEffect(() =>{
-      getProducts.then((dataList) =>{
-        setProducts(dataList)
+      const getProducts = new Promise((resolve) =>{
+        resolve(data)
       })
-      .catch(error => console.log(error))
-    },)
+      getProducts.then(res => setProducts(res.find(datas => datas.id === detalleId)))
+    },[])
   
-    const getProducts = new Promise((resolve, reject) =>{
-        setTimeout(() =>{
-          resolve(data)
-        },2000)
-    })
 
   return (
       <div>  
-        {
-            products.length > 0 && <ItemDetail details={products[0]}/> 
-        }
-    </div>
+        <ItemDetail products={products}/> 
+      </div>
   )
 }
 
