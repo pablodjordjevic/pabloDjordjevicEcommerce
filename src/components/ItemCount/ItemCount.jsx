@@ -2,7 +2,7 @@
 import { PlusCircleIcon, MinusCircleIcon } from '@heroicons/react/24/outline'
 import { useState } from 'react';
 
-const ItemCount = ({stock, initial}) => {
+const ItemCount = ({stock, initial, onAdd}) => {
 
      const [count, setCount] = useState(initial);
      
@@ -20,7 +20,7 @@ const ItemCount = ({stock, initial}) => {
 
  return(
     <div className='flex justify-center items-center mt-12'>
-        <div className="w-96 h-96 shadow-lg flex justify-end items-center pb-5 flex-col">
+        <div className="flex flex-col">
             <div className='flex justify-center items-center'>
                 <button className="text-base" onClick={handleRemove}>
                     <MinusCircleIcon className="h-6 w-6" aria-hidden="true" />
@@ -33,7 +33,7 @@ const ItemCount = ({stock, initial}) => {
                 </button>
             </div>
             <div className='mt-5'>
-                <button className='rounded-lg bg-cyan-500 hover:bg-cyan-600 p-2'>
+                <button className='rounded-lg bg-cyan-500 hover:bg-cyan-600 p-2' disabled={stock<=0} onClick={()=>onAdd(count)}>
                     Agregar a carrito
                 </button>
             </div>

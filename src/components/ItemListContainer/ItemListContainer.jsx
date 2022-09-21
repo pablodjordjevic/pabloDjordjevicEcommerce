@@ -24,7 +24,7 @@ const {category} = useParams();
       },500)
   })
 
-const productEnviar = category ? products.filter((product) => {console.log(product); return  product.category === category }) : products;
+const productEnviar = category ? products.filter((product) => { return  product.category === category }) : products;
 
 
   return (
