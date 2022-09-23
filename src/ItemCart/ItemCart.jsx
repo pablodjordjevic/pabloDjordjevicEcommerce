@@ -114,11 +114,11 @@ const ItemCart = () => {
                       <div className="mt-6">
                       </div>
                       <div className="mt-6 flex flex-col justify-center text-center text-sm text-gray-500">
-                        <p>
+                        <p className='rounded-lg text-white bg-cyan-500 hover:bg-cyan-600 p-2'>
                           <Link
                           to='/product'
                             type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                            className="font-medium  text-white"
                             onClick={() => setOpen(false)}
                           >
                             Continuar comprando
@@ -127,7 +127,7 @@ const ItemCart = () => {
 
                           
                         </p>
-                        <button onClick={()=> clearCart()}>
+                        <button className='' onClick={()=> clearCart()}>
                             Borrar productos
                         </button>
                       </div>
