@@ -5,7 +5,9 @@ import { useState } from 'react';
 const ItemCount = ({stock, initial, onAdd}) => {
 
      const [count, setCount] = useState(initial);
+
      
+
      const handleAdd = () => {
         if(count<stock){
             setCount(count+1)
@@ -36,6 +38,7 @@ const ItemCount = ({stock, initial, onAdd}) => {
                 <button className='rounded-lg bg-cyan-500 hover:bg-cyan-600 p-2' disabled={stock<=0} onClick={()=>onAdd(count)}>
                     Agregar a carrito
                 </button>
+               
             </div>
         </div>
     </div>

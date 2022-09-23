@@ -1,44 +1,31 @@
 import ItemCount from "../ItemCount/ItemCount";
+import { useCartContext } from "../../CartContext/CartContext";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { StarIcon } from '@heroicons/react/20/solid'
+
 
 const ItemDetail = ({products}) => {
-  
   const [carrito, setCarrito] = useState(false);
+
+  const {addProduct} = useCartContext();
   
-  const onAdd = () => {
+  const onAdd = (cantidad) => {
     setCarrito(true);
+    addProduct(products, cantidad)
   }
 
   return (
-    <div>
-      {/*<div className="grid grid-cols-2 gap-4 justify-center mt-8 bg-white">
-        <div className="flex justify-center items-center">
-            <img width={500} src={products.image} alt={products.title} />
-        </div>
-        <div className="flex flex-col justify-center items-center">
-            <h4 className="text-7xl">{products.title}</h4>
-            <p className="my-5">{products.detail}</p>
-            <p>${products.price}</p>
-            <div>
-            {
-              carrito ? <div><Link to='/cart'>Terminar compra</Link></div> : <ItemCount initial={1} stock={10} onAdd={onAdd}/>
-            }
-        </div>
-        </div> */}
-    
+    <div>    
         <div className="bg-white m-24 rounded-xl">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
-          <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            
+          <div role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
             <li className="text-sm">
               <a href={products.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
                 {products.title}
               </a>
             </li>
-          </ol>
+          </div>
         </nav>
 
         {/* Imagen */}
@@ -65,7 +52,12 @@ const ItemDetail = ({products}) => {
             <p className="text-3xl tracking-tight text-gray-900">${products.price}</p>
             <div>
               {
-                carrito ? <div className="flex justify-center items-center mt-12"><Link to='/cart' className="rounded-lg bg-cyan-500 hover:bg-cyan-600 p-2">Terminar compra</Link></div> : <ItemCount initial={1} stock={10} onAdd={onAdd}/>
+                carrito ? 
+                <div className="flex justify-center items-center mt-12">
+                    <div>
+                      <Link to='/cart' className="rounded-lg bg-cyan-500 hover:bg-cyan-600 p-2">Terminar compra</Link>
+                    </div>
+                  </div> : <ItemCount initial={1} stock={10} onAdd={onAdd}/>
               }
             </div>
           </div>
