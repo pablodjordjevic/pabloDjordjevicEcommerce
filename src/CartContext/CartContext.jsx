@@ -16,8 +16,19 @@ const CartProvider = ({children}) => {
 
     console.log(cart)
 
-    const inInCart = (id) => cart.find(product => product.id === id ) ? true : false;
-    
+    // const addProduct = (item, nuevaCantidad) =>{
+    //     if(inInCart(item.id)){
+    //         setCart(cart.map(product=>{
+    //             return product.id === item.id ? {...product, nuevaCantidad: product.nuevaCantidad + nuevaCantidad}: product
+    //         }));
+    //     }else{
+    //         setCart([...cart, {...item, nuevaCantidad}]);
+    //     }
+    // }
+
+    // const inInCart = (id) => cart.find(product => product.id === id ) ? true : false;
+
+
     const clearCart = () =>{
         setCart([]);
     }
@@ -34,7 +45,7 @@ const CartProvider = ({children}) => {
 
   return (
     <CartContext.Provider value={{
-        inInCart,
+        
         clearCart,
         addProduct,
         removeProduct,
