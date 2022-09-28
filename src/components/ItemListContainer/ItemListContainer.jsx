@@ -1,7 +1,8 @@
-import data from "../data";
+// import data from "../data";
 import ItemList from "../ItemList/ItemList";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
+import { getFirestore, collection, getDocs, query , where } from 'firebase/firestore'
 
 const ItemListContainer = () => {
 
@@ -11,19 +12,26 @@ const {category} = useParams();
 
 
   useEffect(() =>{
-    getProducts.then((dataList) =>{
-      setProducts(dataList)
-    })
-    .catch(error => console.log(error))
+    const querydb = getFirestore();
+    const queryCollection = collection(querydb, 'products');
+    
+    if(category){
+      const queryFilter = query(queryCollection, where('category' , '==', category))
+      getDocs(queryFilter)
+        .then(res => setProducts(res.docs.map(product => ( {id: product.id, ...product.data() } ))))
+      }else{
+        getDocs(queryCollection)
+          .then(res => setProducts(res.docs.map(product => ( {id: product.id, ...product.data() } ))))
+    }  
+     
 
-  },[])
+    // getProducts.then((dataList) =>{
+    //   setProducts(dataList)
+    // })
+    // .catch(error => console.log(error))
+
+  },[category])
   
-  const getProducts = new Promise((resolve, reject) =>{
-      setTimeout(() =>{
-        resolve(data)
-      },500)
-  })
-
 const productEnviar = category ? products.filter((product) => { return  product.category === category }) : products;
 
 
