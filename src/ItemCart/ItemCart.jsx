@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import React from 'react'
 import { useCartContext } from '../CartContext/CartContext'
 import { Link } from 'react-router-dom'
@@ -9,6 +9,24 @@ const ItemCart = () => {
 
     const [open, setOpen] = useState(true)
     const {removeProduct,cart,precioTotal, clearCart} = useCartContext();
+
+    const order = {
+      comprador: {
+          name: 'Pablo',
+          phone: '114787878',
+          email: 'pablodjcoder@uol.com'
+      },
+
+      items: cart.map(product => ({id: product.id, title: product.title, price: product.price , quantity: product.cantidad})),
+      total: precioTotal(),
+  }
+
+  const clickComprar = () =>{
+      const db = getFirestore();
+      const orderCollection = collection(db, 'orders');
+      addDoc(orderCollection, order)
+      .then(({ id }) => console.log(id))
+  }
 
   return (
     <div>
@@ -124,10 +142,13 @@ const ItemCart = () => {
                             Continuar comprando
                             <span aria-hidden="true"> &rarr;</span>
                           </Link>
-
-                          
                         </p>
-                        <button className='' onClick={()=> clearCart()}>
+                        <button onClick={clickComprar}>
+                          <p className='rounded-lg text-white bg-violet-600 p-2 mt-3'>
+                            Emitir compra
+                          </p>
+                        </button>
+                        <button className='mt-3 ' onClick={()=> clearCart()}>
                             Borrar productos
                         </button>
                       </div>

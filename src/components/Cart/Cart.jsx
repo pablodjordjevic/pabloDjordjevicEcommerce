@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../CartContext/CartContext'
@@ -5,8 +6,8 @@ import ItemCart from '../../ItemCart/ItemCart';
 const Cart = () => {
 
     const {cart, precioTotal} = useCartContext();
-    
-    if(cart.length === 0){
+
+    if(!cart.length){
         return(
             <div className='flex justify-center items-center'>
                 <div className='bg-white mt-24 p-11 rounded-lg'>
@@ -20,6 +21,7 @@ const Cart = () => {
                     <div className='rounded-lg bg-cyan-500 hover:bg-cyan-600 p-2'>
                         <Link to='/product'>Seguir comprando</Link>
                     </div>
+
                 </div>
             </div>
         )
