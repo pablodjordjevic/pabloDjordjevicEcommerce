@@ -7,7 +7,6 @@ import CartWidget from '../CartWidget/CartWidget'
 const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'Products', href: '/product', current: false },
-  { name: 'Contact', href: '/', current: false },
 ]
 
 function classNames(...classes) {
